@@ -18,6 +18,7 @@ class BookCreate(BaseModel):
     finished_at: Optional[datetime.date] = None
 
 
+# all fields Optional so PATCH only updates what the client actually sends
 class BookUpdate(BaseModel):
     title: Optional[str] = None
     author: Optional[str] = None

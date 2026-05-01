@@ -9,4 +9,4 @@ class Settings(BaseSettings):
     BCRYPT_ROUNDS: int = 12
 
 
-settings = Settings()  # type: ignore
+settings = Settings()  # type: ignore[call-arg]
