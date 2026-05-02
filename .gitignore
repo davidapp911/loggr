@@ -9,3 +9,4 @@ venv/
 implementation_plan.pdf
 development_phases.pdf
 misc.py
+query.sql
