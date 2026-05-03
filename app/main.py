@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 
-from app.routers import auth, books, genres
+from app.routers import auth, books, genres, reviews
 
 app = FastAPI(title="Loggr API")
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(books.router, prefix="/books", tags=["book"])
 app.include_router(genres.router, prefix="/genres", tags=["genre"])
+app.include_router(reviews.router, prefix="/review", tags=["review"])
 
 
 @app.get("/health")
