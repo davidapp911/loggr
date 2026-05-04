@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.core.deps import database_session, get_current_user
+from app.core.dependencies import database_session, get_current_user
 from app.models.review import Review
 from app.models.user import User
 from app.routers.books import fetch_book
@@ -28,7 +28,9 @@ def get_reviews(book_id: int, db: Session = Depends(database_session), current_u
 
 
 @router.patch("/books/{book_id}/reviews/{review_id}", response_model=ReviewOut, status_code=200)
-def update_review(book_id: int, review_id: int, body: ReviewUpdate, db: Session = Depends(database_session), current_user: User = Depends(get_current_user)):
+def update_review(
+    book_id: int, review_id: int, body: ReviewUpdate, db: Session = Depends(database_session), current_user: User = Depends(get_current_user)
+):
     review = fetch_review(book_id, review_id, db, current_user)
 
     if not body.content or body.content.strip() == "":

@@ -1,0 +1,21 @@
+id,user_id,title,author,isbn,status,rating,started_at,finished_at
+1,1,The Pragmatic Programmer,David Thomas,978-0135957059,finished,4.8,2024-01-05,2024-02-10
+2,1,Dune,Frank Herbert,978-0441013593,reading,,2024-03-01,
+3,1,Sapiens,Yuval Noah Harari,978-0062316097,finished,4.5,2023-11-01,2023-12-15
+4,2,The Hobbit,J.R.R. Tolkien,978-0547928227,finished,5.0,2024-02-01,2024-02-20
+5,2,A Brief History of Time,Stephen Hawking,978-0553380163,want_to_read,,,
+6,2,Gone Girl,Gillian Flynn,978-0307588371,reading,,2024-04-10,
+7,3,Atomic Habits,James Clear,978-0735211292,finished,4.7,2024-01-20,2024-02-05
+8,3,The Great Gatsby,F. Scott Fitzgerald,978-0743273565,finished,3.8,2023-10-01,2023-10-18
+9,4,Clean Code,Robert C. Martin,978-0132350884,finished,4.2,2024-01-10,2024-02-28
+10,4,1984,George Orwell,978-0451524935,finished,4.9,2023-09-01,2023-09-25
+11,5,The Alchemist,Paulo Coelho,978-0062315007,finished,4.3,2024-02-15,2024-02-22
+12,5,Thinking Fast and Slow,Daniel Kahneman,978-0374533557,reading,,2024-03-10,
+13,6,The Name of the Wind,Patrick Rothfuss,978-0756404741,finished,4.6,2024-01-01,2024-01-30
+14,6,Educated,Tara Westover,978-0399590504,finished,4.8,2023-12-01,2023-12-20
+15,7,The Hitchhiker's Guide to the Galaxy,Douglas Adams,978-0345391803,finished,4.7,2024-02-10,2024-02-15
+16,7,Meditations,Marcus Aurelius,978-0140449334,want_to_read,,,
+17,8,The Road,Cormac McCarthy,978-0307387899,finished,4.1,2024-03-01,2024-03-18
+18,8,Deep Work,Cal Newport,978-1455586691,reading,,2024-04-01,
+19,9,The Martian,Andy Weir,978-0553418026,finished,4.6,2024-02-20,2024-03-05
+20,10,Norwegian Wood,Haruki Murakami,978-0375704024,want_to_read,,,

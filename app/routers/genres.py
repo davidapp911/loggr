@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.core.deps import database_session
+from app.core.dependencies import database_session
 from app.models.genre import Genre
 from app.schemas.genre import GenreOut
 

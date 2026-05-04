@@ -10,6 +10,7 @@ from app.db.base import Base
 
 if TYPE_CHECKING:
     from app.models.book import Book
+    from app.models.review import Review
 
 
 class User(Base):
@@ -23,3 +24,4 @@ class User(Base):
 
     # cascade="all, delete-orphan": deleting a user automatically deletes all their books
     books: Mapped[list["Book"]] = relationship("Book", back_populates="user", cascade="all, delete-orphan")
+    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="user", cascade="all, delete-orphan")

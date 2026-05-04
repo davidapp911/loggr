@@ -1,9 +1,12 @@
+from typing import Optional
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.core.deps import database_session, get_current_user
-from app.models.book import Book
+from app.core.dependencies import database_session, get_current_user
+from app.models.association import book_genres
+from app.models.book import Book, book_status
 from app.models.genre import Genre
 from app.models.user import User
 from app.schemas.book import BookCreate, BookOut, BookUpdate
@@ -21,8 +24,23 @@ def create_book(body: BookCreate, db: Session = Depends(database_session), curre
 
 
 @router.get("/", response_model=list[BookOut], status_code=200)
-def get_books(db: Session = Depends(database_session), current_user: User = Depends(get_current_user)):
-    return db.execute(select(Book).where(Book.user_id == current_user.id)).scalars().all()
+def get_books(
+    status: Optional[book_status] = None,
+    genre_id: Optional[int] = None,
+    limit: int = 20,
+    offset: int = 0,
+    db: Session = Depends(database_session),
+    current_user: User = Depends(get_current_user),
+):
+    query = select(Book).where(Book.user_id == current_user.id)
+
+    if status is not None:
+        query = query.where(Book.status == status)
+
+    if genre_id is not None:
+        query = query.join(book_genres, Book.id == book_genres.c.book_id).where(book_genres.c.genre_id == genre_id)
+
+    return db.execute(query.limit(limit).offset(offset)).scalars().all()
 
 
 @router.get("/{id}", response_model=BookOut, status_code=200)

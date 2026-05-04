@@ -2,15 +2,14 @@ from collections.abc import Iterator
 
 import jwt
 from fastapi import Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.db.base import SessionLocal
 from app.models.user import User
 
-# tells FastAPI where clients obtain a token — used to render the Authorize button in Swagger UI
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+bearer_scheme = HTTPBearer()
 
 
 def database_session() -> Iterator[Session]:
@@ -26,7 +25,8 @@ def database_session() -> Iterator[Session]:
         db.close()  # always release the connection back to the pool
 
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(database_session)) -> User:
+def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme), db: Session = Depends(database_session)) -> User:
+    token = credentials.credentials
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         user_id: int = int(payload["sub"])  # KeyError/ValueError caught below if "sub" is missing or non-numeric

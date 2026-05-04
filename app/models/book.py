@@ -12,6 +12,7 @@ from app.models.association import book_genres
 
 if TYPE_CHECKING:
     from app.models.genre import Genre
+    from app.models.review import Review
     from app.models.user import User
 
 
@@ -27,7 +28,6 @@ class Book(Base):
     title: Mapped[str] = mapped_column(String(300), nullable=False)
     author: Mapped[str] = mapped_column(String(200), nullable=False)
     isbn: Mapped[Optional[str]] = mapped_column(String(20), nullable=True, unique=True)
-    total_pages: Mapped[Optional[int]] = mapped_column(nullable=True)
     status: Mapped[book_status] = mapped_column(Enum(book_status), nullable=False)
     rating: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     started_at: Mapped[Optional[datetime.date]] = mapped_column(Date, nullable=True)
@@ -40,3 +40,4 @@ class Book(Base):
 
     # secondary tells SQLAlchemy to use book_genres as the join table — no manual inserts needed
     genres: Mapped[list["Genre"]] = relationship("Genre", secondary=book_genres, back_populates="books")
+    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="book", cascade="all, delete-orphan")
